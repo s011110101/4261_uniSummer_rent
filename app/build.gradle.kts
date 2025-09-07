@@ -70,8 +70,8 @@ dependencies {
     implementation(libs.firebase.common)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
-
-
+    implementation("com.google.firebase:firebase-storage")
+    implementation("androidx.activity:activity:1.9.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -27,6 +27,11 @@
             android:exported="false"
             android:theme="@style/Theme._4261_uniSummer_rent"
         />
+        <activity
+            android:name="com.example.a4261_unisummer_rent.view.CreatePostActivity"
+            android:exported="false"
+            android:theme="@style/Theme._4261_uniSummer_rent"/>
+
 
 
     </application>
