@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(topAppBar);
 
         pager = findViewById(R.id.pager);
-        pager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);  // key for swipe down/up
+        pager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
 
-        // Simple page spacing (optional, looks nice)
         int pageMarginPx = getResources().getDimensionPixelSize(android.R.dimen.app_icon_size) / 4;
         pager.setPageTransformer((page, position) -> {
             page.setTranslationY(position * pageMarginPx);
