@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import java.util.*;
 
 public class User {
-    private UUID id;
+    private String id;
     private String username;
-    private String passwords;
+    private String email;
     //private float rate;
 
     public String getUsername() {
@@ -17,21 +17,18 @@ public class User {
     //    return rate;
     //}
 
-    public UUID getId() {
+    public String getId() {
         return id;
-    }
-    public boolean checkPasswords(String passwords){
-        return this.passwords.equals(passwords);
     }
 
     public void setPasswords(String passwords) {
-        this.passwords = passwords;
+        this.email = passwords;
     }
 
-    public User(UUID id, String username, String passwords) {
+    public User(String id, String username, String passwords) {
         this.id = id;
         this.username = username;
-        this.passwords = passwords;
+        this.email = email;
         //this.rate = rate;
     }
 

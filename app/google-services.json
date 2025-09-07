@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1081628140070",
+    "project_id": "untrentswapdb",
+    "storage_bucket": "untrentswapdb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081628140070:android:3933dec0d5f9f4e4b83ce7",
+        "android_client_info": {
+          "package_name": "com.example.a4261_unisummer_rent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5QMTG0umOzDCwNBD_vXOb7wjiRdUxL7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

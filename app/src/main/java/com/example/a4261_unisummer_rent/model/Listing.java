@@ -4,21 +4,21 @@ import android.media.Image;
 import java.text.DateFormat;
 import java.util.*;
 public class Listing {
-    private UUID id;
+    private String id;
     private String title;
     private String description;
     private int status;
-    private UUID posterID;
+    private String posterID;
     private int price;
     //private DateFormat date;
     private int image;
 
-    public Listing(UUID id, String title, int price, String description, int status, UUID posterID, int image) {
+    public Listing(String id, String title, int price, String description, String posterID, int image) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.description = description;
-        this.status = status;
+        status = 0;
         this.posterID = posterID;
         //this.date = date;
         this.image = image;
@@ -49,7 +49,7 @@ public class Listing {
         this.image = image;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -62,7 +62,7 @@ public class Listing {
         return price;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -78,7 +78,7 @@ public class Listing {
         return status;
     }
 
-    public UUID getPostedBy() {
+    public String getPostedBy() {
         return posterID;
     }
 
