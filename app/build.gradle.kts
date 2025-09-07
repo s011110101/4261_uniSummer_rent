@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.a4261_unisummer_rent"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.a4261_unisummer_rent"
@@ -37,7 +37,9 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+
         compose = true
+
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"

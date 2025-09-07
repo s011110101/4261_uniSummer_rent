@@ -12,13 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._4261_uniSummer_rent"
         tools:targetApi="31">
+
         <activity
-            android:name=".view.listingGallery"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name="com.example.a4261_unisummer_rent.view.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme._4261_uniSummer_rent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
