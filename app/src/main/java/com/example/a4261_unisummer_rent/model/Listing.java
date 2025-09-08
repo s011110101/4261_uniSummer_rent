@@ -8,7 +8,7 @@ public class Listing {
     private String title;
     private String description;
     private int status;
-    private String posterID;
+    private String postedBy;
     private int price;
     //private DateFormat date;
     private int image;
@@ -19,7 +19,7 @@ public class Listing {
         this.price = price;
         this.description = description;
         status = 0;
-        this.posterID = posterID;
+        postedBy = posterID;
         //this.date = date;
         this.image = image;
     }
@@ -77,9 +77,11 @@ public class Listing {
     public int getStatus() {
         return status;
     }
-
+    public String getPosterID(){
+        return postedBy;
+    }
     public String getPostedBy() {
-        return posterID;
+        return postedBy;
     }
 
     //public DateFormat getDate() {

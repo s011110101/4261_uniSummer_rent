@@ -29,7 +29,6 @@ public class CreatePostActivity extends AppCompatActivity {
     private MaterialButton btnPickImage, btnPost;
 
     private Uri pickedImageUri = null;
-
     private final ActivityResultLauncher<String> pickImageLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {

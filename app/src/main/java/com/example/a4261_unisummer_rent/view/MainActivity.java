@@ -38,6 +38,7 @@ import android.widget.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        rv = findViewById(R.id.recyclerView);   // <-- ensure your activity_main has this id
+        rv = findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ListingPagerAdapter(data);
         rv.setAdapter(adapter);
@@ -71,31 +72,40 @@ public class MainActivity extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
 
         fabAdd.setOnClickListener(v -> onActionClicked());
-        // Start Firestore realtime updates (or call loadOnce() if you prefer one-shot)
         subscribeToListings();
     }
 
     private void subscribeToListings() {
+        FirebaseFirestore.getInstance().collection("listings").get()
+                .addOnSuccessListener(qs -> {
+                    Log.d("Once", "root listings count=" + qs.size());
+                    for (DocumentSnapshot d : qs) {
+                        Log.d("Once", "docId=" + d.getId() + " data=" + d.getData());
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("Once", "root listings fetch failed", e));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        registration = db.collection("listings")
-                // .orderBy("createdAt", Query.Direction.DESCENDING) // if you add a timestamp later
-                .orderBy("title", Query.Direction.ASCENDING) // deterministic order for now
+        registration = FirebaseFirestore.getInstance().collection("listings")
                 .addSnapshotListener(this, (snap, e) -> {
                     if (e != null) {
                         Log.e("MainActivity", "listen failed", e);
                         Toast.makeText(this, "Failed to load listings", Toast.LENGTH_SHORT).show();
-                        // fallback to seed only if we have nothing to show yet
                         if (data.isEmpty()) {
-                            data.addAll(seedData());
                             adapter.notifyDataSetChanged();
                         }
                         return;
                     }
                     if (snap == null) return;
 
+                    Log.d("MainActivity", "listings size=" + snap.size());
+                    for (DocumentSnapshot d : snap) {
+                        Log.d("MainActivity", "doc: " + d.getId());
+                    }
+
                     bindSnapshot(snap);
                 });
+
     }
 
     private void bindSnapshot(QuerySnapshot snap) {
@@ -104,10 +114,7 @@ public class MainActivity extends AppCompatActivity {
             Listing l = mapDocToListing(d);
             if (l != null) data.add(l);
         }
-        // Optional: if Firestore is empty, show local seed data
-        if (data.isEmpty()) {
-            data.addAll(seedData());
-        }
+
         adapter.notifyDataSetChanged();
     }
 
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             String title = getStringSafe(d, "title", "");
             String description = getStringSafe(d, "description", "");
             String posterId = getStringSafe(d, "posterId", null);
+            String postedBy = getStringSafe(d, "postedBy", null);
 
             int price = getIntSafe(d, "price", 0);
             // WARNING: resource IDs aren't portable; seeded for demo only
@@ -173,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        subscribeToListings();
     }
     @Override
     protected void onStart() {
@@ -182,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
+        subscribeToListings();
     }
 }
 
