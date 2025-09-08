@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
             // If your Listing class has this exact constructor, this will compile.
             // If your parameter order differs, reorder accordingly here.
-            return new Listing(id, title, price, description, posterId, image);
+            return new Listing(id, title, price, description, postedBy, image);
 
         } catch (Exception ex) {
             Log.w("MainActivity", "Skipping bad doc " + d.getId(), ex);
